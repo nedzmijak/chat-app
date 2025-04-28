@@ -1,0 +1,281 @@
+/* Styles for Chat Application
+   Organized into logical sections for readability
+   Author: Nedžmija Karić */
+
+   @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+   /*=====================================
+   =            CSS Variables            =
+   =====================================*/
+   :root {
+     --bg-body: #f9fafc;
+     --bg-sidebar: #e7ecf7;
+     --bg-chat: #ffffff;
+     --bubble-user: #edf0fb;
+     --bubble-system: #fff8e6;
+     --active-user-bg: #d6def6;
+     --text-main: #1d1d1f;
+     --text-subtle: #5f5f63;
+     --accent: #7289da;
+     --accent-hover: #5f70c0;
+     --radius: 14px;
+     --font: 'Poppins', 'Segoe UI', sans-serif;
+   }
+   
+   /*=====================================
+   =             Base Styles             =
+   =====================================*/
+   body {
+     margin: 0;
+     font-family: var(--font);
+     background: var(--bg-body);
+     color: var(--text-main);
+   }
+   
+   /*=====================================
+   =             Layout Grid             =
+   =====================================*/
+   .app-container {
+     display: flex;
+     flex-direction: row; /* desktop: sidebar + chat */
+     height: 100vh;
+     overflow: hidden;
+   }
+   
+   /*=====================================
+   =             Sidebar                =
+   =====================================*/
+   .sidebar {
+     width: 260px;
+     background: var(--bg-sidebar);
+     padding: 24px;
+     display: flex;
+     flex-direction: column;
+     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+   }
+   .sidebar h3 {
+     margin: 0 0 20px;
+     font-size: 20px;
+     font-weight: 600;
+     color: var(--accent);
+     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+     padding-bottom: 8px;
+   }
+   .sidebar ul {
+     list-style: none;
+     margin: 0;
+     padding: 0;
+     flex-grow: 1;
+     overflow-y: auto;
+   }
+   .sidebar li {
+     padding: 10px 14px;
+     margin-bottom: 8px;
+     background: rgba(0, 0, 0, 0.03);
+     border-radius: var(--radius);
+     font-weight: 500;
+     cursor: pointer;
+     transition: background 0.2s;
+   }
+   .sidebar li:hover {
+     background: rgba(0, 0, 0, 0.07);
+   }
+   .sidebar li.active-user {
+     background: var(--active-user-bg);
+     font-weight: 600;
+   }
+   
+   /*=====================================
+   =            Chat Area               =
+   =====================================*/
+   .chat-area {
+     flex: 1;
+     display: flex;
+     flex-direction: column;
+     background: var(--bg-chat);
+     overflow: hidden;
+   }
+   .chat-header {
+     background: #fff;
+     padding: 24px;
+     border-bottom: 1px solid #ddd;
+   }
+   .chat-header h2 {
+     margin: 0;
+     font-size: 22px;
+     font-weight: 600;
+   }
+   
+   /*=====================================
+   =            Chat Box                =
+   =====================================*/
+   .chat-box {
+     flex: 1;
+     display: flex;
+     flex-direction: column;
+     gap: 16px;
+     padding: 30px 24px 20px;
+     background: #f5f6fa;
+     overflow-y: auto;
+   }
+   
+   /*=====================================
+   =          Message Bubbles           =
+   =====================================*/
+   .message .user {
+     font-size: 14px;
+     font-weight: 500;
+     color: var(--accent);
+     margin-bottom: 4px;
+   }
+   .message p {
+     margin: 0;
+     padding: 14px 18px;
+     background: var(--bubble-user);
+     border-radius: var(--radius);
+     color: var(--text-main);
+     box-shadow: 0 1px 5px rgba(0,0,0,0.04);
+     max-width: 70%;
+     line-height: 1.5;
+   }
+   .message.system p {
+     background: var(--bubble-system);
+     color: var(--text-subtle);
+     font-style: italic;
+   }
+   
+   /*=====================================
+   =            Timestamp               =
+   =====================================*/
+   .timestamp {
+     font-size: 0.75em;
+     color: var(--text-subtle);
+     margin-top: 4px;
+     align-self: flex-end;
+   }
+   
+   /*=====================================
+   =        Typing Indicator            =
+   =====================================*/
+   .typing-indicator {
+     padding: 0 24px 10px;
+     color: var(--text-subtle);
+     font-style: italic;
+   }
+   
+   /*=====================================
+   =          Input Area                =
+   =====================================*/
+   .input-area {
+     display: flex;
+     align-items: center;
+     gap: 12px;
+     padding: 20px 24px;
+     border-top: 1px solid #ddd;
+     background: #fff;
+     position: sticky;
+     bottom: 0;
+     z-index: 10;
+   }
+   .input-area input {
+     flex: 1;
+     padding: 14px 20px;
+     font-size: 16px;
+     border-radius: var(--radius);
+     border: 1px solid #ccc;
+     outline: none;
+     transition: border-color 0.2s;
+   }
+   .input-area input:focus {
+     border-color: var(--accent);
+   }
+   .input-area input::placeholder {
+     color: #999;
+   }
+   .input-area button {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     padding: 12px 20px;
+     font-size: 20px;
+     background: var(--accent);
+     color: #fff;
+     border: none;
+     border-radius: 50%;
+     cursor: pointer;
+     transition: background 0.2s;
+   }
+   .input-area button:hover {
+     background: var(--accent-hover);
+   }
+   
+   /*=====================================
+   =         Emoji Picker Wrapper       =
+   =====================================*/
+   .emoji-picker-wrapper {
+     position: absolute;
+     bottom: 70px;
+     right: 16px;
+     z-index: 10000;
+     overflow: visible;
+     width: auto;
+     max-width: 90vw;
+     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+     border-radius: var(--radius);
+   }
+   
+   /*=====================================
+   =         Responsive Design          =
+   =====================================*/
+   @media (max-width: 768px) {
+     /* stack sidebar above chat */
+     .app-container {
+       flex-direction: column;
+     }
+     /* make sidebar a top horizontal bar */
+     .sidebar {
+       width: 100%;
+       padding: 12px 16px;
+       height: auto;
+       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+       overflow-x: auto;
+       white-space: nowrap;
+     }
+     .sidebar h3 {
+       display: none;
+     }
+     .sidebar ul {
+       display: flex;
+       gap: 10px;
+     }
+     .sidebar li {
+       flex: 0 0 auto;
+       margin-bottom: 0;
+     }
+     /* chat-area takes rest */
+     .chat-area {
+       flex: 1;
+       height: calc(100vh - 56px); /* adjust for sidebar height */
+     }
+     .chat-header {
+       padding: 16px;
+     }
+     .chat-header h2 {
+       font-size: 18px;
+     }
+     .chat-box {
+       padding: 16px 24px 30px;
+     }
+     .message p {
+       padding: 12px 14px;
+       font-size: 15px;
+     }
+     .input-area {
+       padding: 12px 16px;
+     }
+     .input-area button {
+       font-size: 18px;
+       padding: 10px 16px;
+     }
+   }
+   
