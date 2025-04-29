@@ -6,14 +6,16 @@ function handleMessages(socket, io) {
     const fromUser = getUserById(socket.id);
     if (!fromUser) return;
 
-    // Spremi u bazu u tabelu messages 
+    console.log(`[${new Date().toISOString()}] ${fromUser.name} -> ${to || 'All'}: ${text}`);
+
+    // Spremanje u bazu u tabelu messages
     await pool.query(
       `INSERT INTO messages(username, recipient, text, timestamp)
        VALUES($1, $2, $3, $4)`,
       [fromUser.name, to, text, new Date().toISOString()]
     );
 
-    // Emit poruke svim klijentima 
+    // Emit poruke svim klijentima
     io.emit('receive_message', {
       user: fromUser.name,
       text,
@@ -26,7 +28,7 @@ function handleMessages(socket, io) {
     const fromName = getUserById(socket.id)?.name;
     if (!fromName) return;
 
-    // notifikacija inicijatoru
+    // notifikacija inicijatoru razgovora
     socket.emit('user_joined_private', { from: fromName });
 
     // notifikacija ciljanom korisniku
