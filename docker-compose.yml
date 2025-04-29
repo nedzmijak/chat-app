@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: chatdb
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+
+  server:
+    build: ./server
+    env_file:
+      - ./server/.env
+    depends_on:
+      - db
+    ports:
+      - "5001:5000"
+
+  client:
+    build: ./client
+    depends_on:
+      - server
+    ports:
+      - "3000:80"
+
+volumes:
+  db-data:
