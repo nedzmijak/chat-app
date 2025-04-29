@@ -17,13 +17,13 @@
 
 Ovako izgleda terminal aplikacije:
 
-![Terminal prikaz](docs/images/image13.png)
+![Terminal prikaz](docs/images/image13.PNG)
 
 Ovako izgleda frontend aplikacije nakon pokretanja:
 
-![Frontend prikaz](docs/images/image11.png)
-![Privatni chat](docs/images/image12.png)
-![Responizvni prikaz](docs/images/image15.png)
-![Baza](docs/images/image14.png)
+![Frontend prikaz](docs/images/image11.PNG)
+![Privatni chat](docs/images/image12.PNG)
+![Responizvni prikaz](docs/images/image15.PNG)
+![Baza](docs/images/image14.PNG)
 
 
